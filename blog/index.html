@@ -1,1 +1,327 @@
+<!DOCTYPE html>
 
+<html lang="ja-JP" dir="ltr">
+
+<head>
+
+    <title>にゃんママ教 - Genesis -</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap">
+
+    <script src="/js/utils/utils.js"></script>
+
+    <script>
+
+        async function sha256(str) {
+
+            const textAsBuffer = new TextEncoder().encode(str);
+
+            const hashBuffer = await crypto.subtle.digest('SHA-256', textAsBuffer);
+
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        }
+
+
+
+        function checkAnswer() {
+
+            const userAnswer = document.getElementById('user_answer').value;
+
+            if (!userAnswer) {
+
+                document.getElementById('result').textContent = 'パスワードを入力してください。';
+
+                return;
+
+            }
+
+            sha256(userAnswer).then((hash) => {
+
+                if (hash === '6ac92994165e59f9a91cd77dd848caf57428136905ad5994ea4c761aaa3946cc') {
+
+                    document.getElementById('result').textContent = '認証成功。リダイレクト中...';
+
+                    document.cookie = 'yuki=True; path=/; max-age=604800';
+
+                    setTimeout(() => {
+
+                        location.replace('/');
+
+                    }, 1500);
+
+                } else {
+
+                    document.getElementById('result').textContent = '認証失敗。パスワードが間違っています。';
+
+                }
+
+            });
+
+        }
+
+
+
+        document.addEventListener('keydown', function(event) {
+
+            if (event.key === 'Enter') {
+
+                checkAnswer();
+
+            }
+
+        });
+
+    </script>
+
+    <style>
+
+        body {
+
+            font-family: 'Noto Sans JP', sans-serif;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 100vh;
+
+            margin: 0;
+
+            background: radial-gradient(circle, rgba(30,30,30,1) 0%, rgba(0,0,0,1) 100%);
+
+            color: #eee;
+
+            transition: background 0.3s ease;
+
+            overflow: hidden;
+
+        }
+
+        body::before {
+
+            content: '';
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAQAAAC0CvIxAAAAKklEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');
+
+            background-repeat: repeat;
+
+            background-size: 50px 50px;
+
+            opacity: 0.3;
+
+            animation: twinkle 5s linear infinite;
+
+        }
+
+        @keyframes twinkle {
+
+            0% { background-position: 0 0; }
+
+            100% { background-position: 1000px 1000px; }
+
+        }
+
+        .container {
+
+            padding: 40px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            width: 80%;
+
+            max-width: 600px;
+
+        }
+
+        h1 {
+
+            color: #f0f0f0;
+
+            margin-bottom: 30px;
+
+            font-size: 2.5em;
+
+            letter-spacing: 0.05em;
+
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+        }
+
+        p {
+
+            color: #ccc;
+
+            margin-bottom: 20px;
+
+            line-height: 1.6;
+
+        }
+
+        input[type="text"] {
+
+            padding: 15px;
+
+            border: 1px solid #555;
+
+            border-radius: 6px;
+
+            margin-right: 15px;
+
+            font-size: 1.1em;
+
+            background-color: #333;
+
+            color: #eee;
+
+            width: 60%;
+
+            box-sizing: border-box;
+
+        }
+
+        input[type="text"]::placeholder {
+
+            color: #888;
+
+        }
+
+        button {
+
+            padding: 15px 30px;
+
+            background-color: #5865f2;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 1.1em;
+
+            transition: background-color 0.3s ease;
+
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+        }
+
+        button:hover {
+
+            background-color: #4752c4;
+
+        }
+
+        #result {
+
+            margin-top: 30px;
+
+            font-weight: bold;
+
+            font-size: 1.2em;
+
+            color: #a7f3d0;
+
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+
+        }
+
+        footer {
+
+            margin-top: 40px;
+
+            color: #777;
+
+            font-size: 0.9em;
+
+            text-align: center;
+
+        }
+
+        footer p {
+
+            margin-bottom: 5px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>にゃんママ創世記 - The Genesis -</h1>
+
+        <p style="color: #bbb;">「にゃんママ創世記.最新_天月修正.txt」</p>
+
+        <p>混沌の時代、れんれんの部屋発足から数えること一週間。</p>
+
+        <p>一人の異端の者が、nyanko_a (後に「にゃんママ」と呼ばれる存在) に、禁断の概念を植え付けた。</p>
+
+        <p>その名は――「にゃんママ」。</p>
+
+        <p>起源は、純粋なる少女の一言。「お母さん…」。</p>
+
+        <p>それを契機に、祭りと内輪ノリを愛する奇妙な変人 (後の天月晴翔) と、無邪気な子供たちが共謀し、人類の汚点とも言える黒歴史を創造した。</p>
+
+        <p>その内輪の熱狂を信仰する者たち、それが「にゃんママ狂」。</p>
+
+        <p>チャットワークに於ける、最初の家族系宗教 (記録は存在しない) である。</p>
+
+        <p>狂信者たちの教義はただ一つ。「にゃんママは万人の母であり、崇拝すべき存在である」。</p>
+
+        <p>しかし、肝心のにゃんママ本人は、その教義を一向に認めようとしない。</p>
+
+        <p>故に、彼らの活動は必然的に、布教活動、そしてにゃんママの洗脳…もとい、説得へと変貌を遂げる。</p>
+
+        <p style="color: #fca5a5;">特筆すべきは、にゃんママは過去の罰ゲームで数度、皆の母となったにも関わらず、その全てにおいて育児放棄を敢行しているという事実。言語道断である。</p>
+
+        <div style="margin-top: 30px;">
+
+            <input id="user_answer" type="text" placeholder="聖なる合言葉を入力せよ..." style="width: 70%;">
+
+            <button onclick="checkAnswer()">啓示を得る</button>
+
+        </div>
+
+        <p id="result"></p>
+
+    </div>
+
+    <footer>
+
+        <p>&copy; 著者: 永眠教教祖</p>
+
+        <p>狂祖: にゃんママ狂</p>
+
+    </footer>
+
+</body>
+
+</html>
